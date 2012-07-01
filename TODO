@@ -1,0 +1,61 @@
+ TODO
+   - `dynamic` param to update list as it is updated on disk. Ignore already downloaded items on list.
+   - Use separate script files (at least for dev- with phing joining them togeter on build)
+   - Get ride of helpers.
+   - Implement pause. Catch interrups/events. (I think events/interrups would be catched by curl instead of our script)
+
+   [done] Use different download.lst, success, failed etc. when they are generated automatically (ie: when using --file)
+   [done] Pass params to curl.
+   [done] Use an index to start downloads from a given item on the list, or download from a given offset a determined number of files. --offset 1,13 (from 1 to 13), --offset 5 (from 5th item)
+   [done] Play sounds on different events like download completion, fail, and etc, or use kmessagebox.
+   [done] Download with a given pattern. Example: *.mpg -- solved passing params to curl or with curl items. I think curl can handle it without further changes.
+   [done] Use the format: --param=value for parameters
+   [done] Recursive listing (open url and sub folders on there). Limit recursion level. ie: --recursion-deep 5
+   [done] Modularize the code. Use functions.
+   [done] Use exit codes to say if some download items had failed.
+   [done] Better parameters handling (such perl's Opt::More)
+   [done] Download file list (directory listing)
+   [done] Accept parameters to perform some actions such:
+       * create download list from a directory listing.
+       x check only operations (file sizes)
+   [done] Add support for single file download: dumpr.sh file http://sdf/file.avi
+ BUG
+   [open]
+   - Doesn't show proxy settings correctly (when no proxy uses it doesn't display anything; when there is a proxy settings enabled it shows "(No proxy)")
+   - Doesn't create /tmp/dumpr folder. Fails to create tmp list if folder doesn't exists.
+   [closed]
+   - It doesn't display the proxy used.
+   - Use local variables next time:
+   Downloading http://zend-sdk.googlecode.com/files/eclipse-php-3.0.2.v2011102768-x86.tar.gz (1)
+
+   curl: (6) Couldn't resolve host '(No'
+
+   curl: (6) Couldn't resolve host 'proxy)'
+   - It seems the "total items" count if wrong by one when counting items from a
+   list. (shows "2" when there are three items)
+
+   - MD5sum fails to hash the files with spaces in their name, ie: image 4.jpg.
+
+   It tries to hash "imgage" and "4.jpg". Have to add quotes around it.
+
+   - When passing an url target the script creates directories for the given url:
+   ie: http://target/url/list ->
+   mkdir -p http:/target/url/list
+
+   [fixed] MD5 of files doesn't work:
+       The destination param provokes the md5sum program to fail to find files to hash:
+       md5sum /path/to/./dest/dir/file.avi
+
+   [featured-removed] Status is not really helpful:
+        Should show more verbose information:
+           * current file being downloaded
+           * number of tries for current file
+           * downloaded from the file (0 on first try, if fail, its updated, but can't be updated on real time)
+           * total downloaded files, completed downloads
+           * failed downloads
+           * remaining downloads
+           * current directory size.
+
+   [by-design] Variable expansion doesn't work: dump.sh . -- conf
+       destination = ".";
+       By default all params should be expanded.

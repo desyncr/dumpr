@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Dumper" default="build" basedir="." description="Download manager/queued downloader">
+    <property file="configuration" />
+
+   <!-- updating timestamp -->
+    <property name="build.time" value="" />
+    <tstamp>
+        <!-- Format is, e.g. Sat, 03 Oct 2009, 16:31 -->
+        <format property="build.time" pattern="%a, %d %b %Y, %H:%M"/>
+    </tstamp>
+    <fileset id="shared" dir="./${directories.share}">
+        <include name="*.sh" />
+    </fileset>
+
+    <!-- Target: prepare
+        Creates the output directory.
+        Deletes previous contents.
+    -->
+    <target name="prepare">
+        <echo msg="Making directory ${directories.deploy}" />
+        <delete dir="${directories.deploy}" includeemptydirs="true" verbose="true" failonerror="true" /> 
+        <mkdir dir="${directories.deploy}" />
+    </target>
+
+    <!-- Target: build
+        Copies files to the target directory.
+    -->
+    <target name="build" depends="prepare">
+        <echo msg="Copying files to deploy directory: ${directories.deploy}/..." />
+        <copy todir="${directories.deploy}">
+            <fileset refid="shared" />
+            <fileset dir=".">
+                <include name="${const.default.main.filename}" />
+            </fileset>
+            <filterchain>
+                <replacetokenswithfile begintoken="{?" endtoken="?}" dir="./" postfix="" translatehtml="false" />
+                <expandproperties />
+            </filterchain>
+        </copy>
+    </target>
+
+    <target name="package" depends="build">
+        <echo msg="Creating archive..." />
+        <zip destfile="${directories.deploy}/${zip.filename}">
+            <fileset dir="${directories.deploy}">
+                <include name="**/**" />
+            </fileset>
+        </zip>
+        <copy file="${directories.deploy}/${zip.filename}" todir="./build/" />
+        <echo msg="Files copied and compressed in build directory OK!"/>
+    </target>
+
+
+    <target name="dist" depends="build">
+       <!-- updating version. default Minor. -->
+        <property name="version.update-type" value="Minor" override="true" />
+        <version releasetype="${version.update-type}" file="${const.default.version.filename}" property="version.number"/>
+        <echo msg="Updating version '${version.update-type}' to ${version.number}" />
+
+        <echo msg="Copying main file to '${const.default.main.filename}'..." />
+        <copy todir="${directories.dist}">
+            <fileset dir="${directories.deploy}">
+                <include name="${const.default.main.filename}" />
+            </fileset>
+        </copy>
+
+        <echo msg="Copying configuration and helpers to '${directories.configuration}'..." />
+        <delete dir="${directories.configuration}" includeemptydirs="true" verbose="true" failonerror="true" />
+        <copy todir="${directories.configuration}">
+            <fileset dir="./${directories.share}">
+                <include name="${const.default.helper.filename}" />
+                <include name="${const.default.conf.filename}" />
+                <include name="${const.default.banner.filename}" />
+            </fileset>
+            <filterchain>
+                <expandproperties />
+            </filterchain>
+        </copy>
+    </target>
+    <target name="clean">
+        <exec dir="." command="rm *~" />
+    </target>
+
+</project>
