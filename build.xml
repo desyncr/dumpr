@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Dumper" default="build" basedir="." description="Download manager/queued downloader">
-    <property file="configuration" />
+    <property name="configuration.file" value="configuration" override="true" />
+    <property file="${configuration.file}" />
 
    <!-- updating timestamp -->
     <property name="build.time" value="" />
@@ -12,6 +13,10 @@
         <include name="*.sh" />
     </fileset>
 
+    <target name="test">
+        <echo msg="Property file: ${configuration.file}" />
+        <echo msg="${directories.configuration}" />
+    </target>
     <!-- Target: prepare
         Creates the output directory.
         Deletes previous contents.
