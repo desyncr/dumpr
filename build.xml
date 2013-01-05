@@ -82,7 +82,7 @@
                 <expandproperties />
             </filterchain>
         </copy>
-        <chmod file="${directories.deploy}/${const.default.main.filename}" mode="0755" verbose="true" />
+        <chmod file="${directories.dist}/${const.default.main.filename}" mode="0755" verbose="true" />
     </target>
     <target name="clean">
         <exec dir="." command="rm *~" />
