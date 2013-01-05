@@ -19,14 +19,19 @@
 #   --retry: Retry attempts.
 #   --hash: If make an md5 hash of the downloaded items.
 #   --on-complete: Executes a program or script, or commands, on download completion.
+#   --update: Update download list as it changes on disk (--list).
+#   --log: Enables logging to file.
 # 
 # More examples:
 #   asphyxia@dev$ dumpr.sh --url=http://localhost/music/ --dest=~/downloads/music/
 # 
 #   Version: ${version.number}
-#   Build time: @BUILDTIMESTAMP@
+#   Build time: ${build.time}
 {?lib/header.sh?}
 {?lib/functions.sh?}
+#   --list-only: Only download the directory listing (--url) and create a download list.
+#   --config: Point to the configuration file.
+#   --alerts: Display alets on download complete.
 ##
 ## Main program
 ##

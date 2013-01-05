@@ -15,7 +15,7 @@ function usage
 {
     # Reads the first 22 lines from the script itself; removes the "#" of comments;
     # and ignores the first line (with 'more +2') which is "#!/bin/bash"
-    head -n 22 $0 | cut -d"#" -f2 -s | more +2
+    head -n 29 $0 | cut -d"#" -f2 -s | more +2
 }
 
 # Checking the existence of the list file and if it's empty.
