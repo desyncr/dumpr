@@ -1,5 +1,15 @@
 #!/bin/bash
-# Download manager/queue downloader.
+#                         8888888b.                                          
+#                         888  "Y88b                                         
+#                         888    888                                         
+#                         888    888 888  888 88888b.d88b.  88888b.  888d888 
+#                         888    888 888  888 888 "888 "88b 888 "88b 888P"   
+#                         888    888 888  888 888  888  888 888  888 888     
+#                         888  .d88P Y88b 888 888  888  888 888 d88P 888     
+#                         8888888P"   "Y88888 888  888  888 88888P"  888     
+#                                                           888              
+#                         Download manager/queue downloader 888              
+#                                                           888              
 # 
 #   ./dumpr.sh --url|--file|--list url|list [--dest][--config][--create-list][--retry][--hash][--on-complete]
 # 
