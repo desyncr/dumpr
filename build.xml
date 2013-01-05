@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Dumper" default="build" basedir="." description="Download manager/queued downloader">
-    <property name="configuration.file" value="configuration" override="true" />
-    <property file="${configuration.file}" />
-
-   <!-- updating timestamp -->
+    <property name="env" value="dist" override="true" />
+    <property file="configuration.${env}" />
+    
+    <loadfile property="version.number" file="version"/>
+    
+    <!-- updating timestamp -->
     <tstamp>
         <!-- Format is, e.g. Sat, 03 Oct 2009, 16:31 -->
         <format property="build.time" pattern="%a, %d %b %Y, %H:%M"/>
@@ -29,7 +31,7 @@
     <!-- Target: build
         Copies files to the target directory.
     -->
-    <target name="build" depends="prepare">
+    <target name="build" depends="prepare">        
         <echo msg="Copying files to deploy directory: ${directories.deploy}/..." />
         <copy todir="${directories.deploy}">
             <fileset refid="shared" />
