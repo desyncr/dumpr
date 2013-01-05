@@ -45,6 +45,11 @@
     </target>
 
     <target name="package" depends="build">
+       <!-- updating version. default Minor. -->
+        <property name="version.update-type" value="Minor" override="true" />
+        <version releasetype="${version.update-type}" file="${const.default.version.filename}" property="version.number"/>
+        <echo msg="Updating version '${version.update-type}' to ${version.number}" />
+        
         <echo msg="Creating archive..." />
         <zip destfile="${directories.deploy}/${zip.filename}">
             <fileset dir="${directories.deploy}">
@@ -57,11 +62,6 @@
 
 
     <target name="dist" depends="build">
-       <!-- updating version. default Minor. -->
-        <property name="version.update-type" value="Minor" override="true" />
-        <version releasetype="${version.update-type}" file="${const.default.version.filename}" property="version.number"/>
-        <echo msg="Updating version '${version.update-type}' to ${version.number}" />
-
         <echo msg="Copying main file to '${const.default.main.filename}'..." />
         <copy todir="${directories.dist}">
             <fileset dir="${directories.deploy}">
