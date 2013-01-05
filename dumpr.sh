@@ -261,11 +261,11 @@ while (( 1 )); do
         if [[ $type == 'list' ]]; then
             tsupdate=$(stat --printf '%Y' $src);
             if [[ $timestamp != $tsupdate ]]; then
-                echo 'Updating list file';
+                log 'Updating list file';
                 items=();
                 parselist "$src";
                 listitems $items;
-                echo "";
+                log '';
 
                 total=${#items[@]};
                 length=$total;
