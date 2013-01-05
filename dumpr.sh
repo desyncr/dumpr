@@ -35,8 +35,8 @@
 # More examples:
 #   asphyxia@dev$ dumpr.sh --url=http://localhost/music/ --dest=~/downloads/music/
 # 
-#   Version: ${version.number}
 #   Build time: ${build.time}
+#   Version: ${version.number}
 {?lib/header.sh?}
 {?lib/functions.sh?}
 #   --list-only: Only download the directory listing (--url) and create a download list.
