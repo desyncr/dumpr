@@ -1,6 +1,6 @@
 directories.deploy=/tmp/dumpr-dev/
-directories.dist=/usr/bin/
-directories.configuration=${user.home}/.dumpr-dev/
+directories.dist=${directories.deploy}
+directories.configuration=${directories.deploy}
 directories.share=./share/
 
 const.default.list.filename=download.lst

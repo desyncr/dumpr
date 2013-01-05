@@ -1,5 +1,15 @@
 #!/bin/bash
-# Download manager/queue downloader.
+#                         8888888b.                                          
+#                         888  "Y88b                                         
+#                         888    888                                         
+#                         888    888 888  888 88888b.d88b.  88888b.  888d888 
+#                         888    888 888  888 888 "888 "88b 888 "88b 888P"   
+#                         888    888 888  888 888  888  888 888  888 888     
+#                         888  .d88P Y88b 888 888  888  888 888 d88P 888     
+#                         8888888P"   "Y88888 888  888  888 88888P"  888     
+#                                                           888              
+#                         Download manager/queue downloader 888              
+#                                                           888              
 # 
 #   ./dumpr.sh --url|--file|--list url|list [--dest][--config][--create-list][--retry][--hash][--on-complete]
 # 
@@ -19,14 +29,19 @@
 #   --retry: Retry attempts.
 #   --hash: If make an md5 hash of the downloaded items.
 #   --on-complete: Executes a program or script, or commands, on download completion.
+#   --update: Update download list as it changes on disk (--list).
+#   --log: Enables logging to file.
 # 
 # More examples:
 #   asphyxia@dev$ dumpr.sh --url=http://localhost/music/ --dest=~/downloads/music/
 # 
+#   Build time: ${build.time}
 #   Version: ${version.number}
-#   Build time: @BUILDTIMESTAMP@
 {?lib/header.sh?}
 {?lib/functions.sh?}
+#   --list-only: Only download the directory listing (--url) and create a download list.
+#   --config: Point to the configuration file.
+#   --alerts: Display alets on download complete.
 ##
 ## Main program
 ##

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Dumper" default="build" basedir="." description="Download manager/queued downloader">
-    <property name="configuration.file" value="configuration" override="true" />
-    <property file="${configuration.file}" />
-
-   <!-- updating timestamp -->
-    <property name="build.time" value="" />
+    <property name="env" value="dist" override="true" />
+    <property file="configuration.${env}" />
+    
+    <loadfile property="version.number" file="version"/>
+    
+    <!-- updating timestamp -->
     <tstamp>
         <!-- Format is, e.g. Sat, 03 Oct 2009, 16:31 -->
         <format property="build.time" pattern="%a, %d %b %Y, %H:%M"/>
@@ -30,7 +31,7 @@
     <!-- Target: build
         Copies files to the target directory.
     -->
-    <target name="build" depends="prepare">
+    <target name="build" depends="prepare">        
         <echo msg="Copying files to deploy directory: ${directories.deploy}/..." />
         <copy todir="${directories.deploy}">
             <fileset refid="shared" />
@@ -45,8 +46,8 @@
     </target>
 
     <target name="package" depends="build">
-       <!-- updating version. default Minor. -->
-        <property name="version.update-type" value="Minor" override="true" />
+        <!-- updating version. default Minor. -->
+        <property name="version.update-type" value="Bugfix" override="true" />
         <version releasetype="${version.update-type}" file="${const.default.version.filename}" property="version.number"/>
         <echo msg="Updating version '${version.update-type}' to ${version.number}" />
         
@@ -61,7 +62,7 @@
     </target>
 
 
-    <target name="dist" depends="build">
+    <target name="install" depends="build">
         <echo msg="Copying main file to '${const.default.main.filename}'..." />
         <copy todir="${directories.dist}">
             <fileset dir="${directories.deploy}">
@@ -70,7 +71,7 @@
         </copy>
 
         <echo msg="Copying configuration and helpers to '${directories.configuration}'..." />
-        <delete dir="${directories.configuration}" includeemptydirs="true" verbose="true" failonerror="true" />
+        <!-- <delete dir="${directories.configuration}" includeemptydirs="true" verbose="true" failonerror="true" /> -->
         <copy todir="${directories.configuration}">
             <fileset dir="./${directories.share}">
                 <include name="${const.default.helper.filename}" />
@@ -81,6 +82,7 @@
                 <expandproperties />
             </filterchain>
         </copy>
+        <chmod file="${directories.deploy}/${const.default.main.filename}" mode="0755" verbose="true" />
     </target>
     <target name="clean">
         <exec dir="." command="rm *~" />
