@@ -15,4 +15,6 @@ log=${const.default.log};
 quiet=${const.default.quiet};
 logfilename=${const.default.log.filename};
 offset=0; length=0; alerts=0;
-proxy_port=0;
+proxy_port="";
+update=0;
+timestamp=0;

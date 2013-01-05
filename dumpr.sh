@@ -95,6 +95,9 @@ while [[ $1 ]]; do
         -x=* | --on-complete=*) # Launch a determined script or binary on download completion.
             launch=${1##*=};
         ;;
+        --update)  # Update list items as the file list is changed
+            update=1;
+        ;;
         -h | --help)        # Display help information.
             usage;
             exit 0;
@@ -175,6 +178,7 @@ case    "$type" in
         src=$TMP_LIST;
     ;;
 esac;
+timestamp=$(stat --printf "%Y" "$src");
 
 ##
 ## Main loop
@@ -191,7 +195,8 @@ total=${#items[@]};
 
 (( !$quiet )) && showsettings;
 
-for url in ${items[@]:$offset:$length}; do
+while (( 1 )); do
+    url=${items[$offset]};
     for try in `seq 1 $retry`; do
         log "Downloading $url ($try)";
 
@@ -221,7 +226,7 @@ for url in ${items[@]:$offset:$length}; do
             downloaded_items="$downloaded_items '$dest/$relative_path/$filename'";
         fi;
 
-        `curl $params $proto $proxy_port  --output "$dest/$relative_path/$filename" -C - --retry $retry $url`;
+        `curl $params $proto $proxy_port  --output "$dest/$relative_path/$filename" -C - --retry $retry "$url"`;
         if (( ! $? )); then
             break;
         fi;
@@ -250,6 +255,29 @@ for url in ${items[@]:$offset:$length}; do
             eval $command;
             let field++;
         done;
+    fi;
+    # Check if we have to update the list as it changes
+    if [[ $update ]]; then
+        if [[ $type == 'list' ]]; then
+            tsupdate=$(stat --printf '%Y' $src);
+            if [[ $timestamp != $tsupdate ]]; then
+                echo 'Updating list file';
+                items=();
+                parselist "$src";
+                listitems $items;
+                echo "";
+
+                total=${#items[@]};
+                length=$total;
+
+                timestamp=$tsupdate;
+            fi;
+        fi;
+    fi;
+
+    let offset++;
+    if (( $offset >= $total )); then
+        break;
     fi;
 done;
 

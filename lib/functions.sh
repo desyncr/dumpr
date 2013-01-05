@@ -54,6 +54,25 @@ function loadconf
     proxy_port="$proxy:$port";
 }
 
+# Initialize main loop variables
+function initialize
+{
+    items=$1;
+    total=${#items[@]};
+    (( !$length )) && length=$total;
+}
+
+# List current items
+function listitems
+{
+    i=0;
+    items=$1;
+    for item in ${items[@]}; do
+        log "[$i] $item";
+        let i++;
+    done;
+}
+
 # Shows current settings.
 function showsettings
 {
@@ -97,11 +116,7 @@ function showsettings
 
     Download list:
 EOF
-i=0;
-for item in ${items[@]}; do
-    log "[$i] $item";
-    let i++;
-done;
+    listitems $items;
 
 cat <<-EOF
 
