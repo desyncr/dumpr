@@ -1,5 +1,8 @@
 TODO
    - Get ride of helpers.
+   - Automate version number updating (as with Phing) - implement after-task on bashing
+   - Fix bashing removing empty lines - useful for formating
+   - Autoupdate installer
    - Add kmessage, kdialog or similar (notify-send)
    - Implement pause. Catch interrups/events. (I think events/interrups would be catched by curl instead of our script)
 
@@ -24,6 +27,7 @@ TODO
 
 BUGS
    [open]
+   - Cancelling downloads wont stop the process (Ctrl+C)
    - Doesn't show proxy settings correctly (when no proxy uses it doesn't display anything; when there is a proxy settings enabled it shows "(No proxy)")
    - Doesn't create /tmp/dumpr folder. Fails to create tmp list if folder doesn't exists.
    [closed]
