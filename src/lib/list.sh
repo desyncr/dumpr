@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# List current items
+function listItems {
+    i=0;
+    items=$1;
+    for item in ${items[@]}; do
+        log "[$i] $item";
+        let i++;
+    done;
+}
+
+# Checking the existence of the list file and if it's empty.
+function listCheck {
+    if [[ -e $1 ]]; then
+        if [ "`wc -l $1 | cut -d' ' -f1`" == "0" ]; then
+            return 2;
+        fi;
+    else
+        return 1;
+    fi;
+}
+
 # Parse a raw list of items into an array
 function listParse {
     i=0;

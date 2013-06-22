@@ -1,5 +1,6 @@
 #!/bin/bash
-if (( ! $# )); then usage; exit 1; fi;
+(( ! $# )) && usage && exit
+
 paramsParse $* && configLoad
 listInitialize
 
@@ -90,8 +91,8 @@ while (( 1 )); do
             if [[ $timestamp != $tsupdate ]]; then
                 log 'Updating list file';
                 items=();
-                parselist "$src";
-                listitems $items;
+                listParse "$src";
+                listItems $items;
                 log '';
 
                 total=${#items[@]};

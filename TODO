@@ -1,8 +1,9 @@
 TODO
    - Get ride of helpers.
-   - Use separate script files (at least for dev- with phing joining them togeter on build)
+   - Add kmessage, kdialog or similar (notify-send)
    - Implement pause. Catch interrups/events. (I think events/interrups would be catched by curl instead of our script)
 
+   [done] Use separate script files (at least for dev- with phing joining them togeter on build)
    [done] Remove phing dependency - use another build script
    [done] `dynamic` param to update list as it is updated on disk. Ignore already downloaded items on list.
    [done] Use different download.lst, success, failed etc. when they are generated automatically (ie: when using --file)

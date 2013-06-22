@@ -14,32 +14,11 @@ function usage {
     cat $USAGE_FILE
 }
 
-# Checking the existence of the list file and if it's empty.
-function checklist {
-    if [[ -e $1 ]]; then
-        if [ "`wc -l $1 | cut -d' ' -f1`" == "0" ]; then
-            return 2;
-        fi;
-    else
-        return 1;
-    fi;
-}
-
 # Initialize main loop variables
 function initialize {
     items=$1;
     total=${#items[@]};
     (( !$length )) && length=$total;
-}
-
-# List current items
-function listitems {
-    i=0;
-    items=$1;
-    for item in ${items[@]}; do
-        log "[$i] $item";
-        let i++;
-    done;
 }
 
 # Shows current settings.
