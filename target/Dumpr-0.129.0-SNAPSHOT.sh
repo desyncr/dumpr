@@ -186,7 +186,7 @@ function listInitialize() {
                 ;;
             esac;
             src=$TMP_LIST;
-            checklist $src;
+            listCheck $src;
             if (( $? )); then # $? != 0
                 log "Error retrieving download list. Aborting." $alerts;
                 exit 1;
@@ -198,7 +198,7 @@ function listInitialize() {
             fi;
         ;;
         list)
-            checklist $src;
+            listCheck $src;
             case    $? in
                 1)
                     log "No list found on '$src'. Aborting." $alerts;
