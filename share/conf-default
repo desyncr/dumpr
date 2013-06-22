@@ -1,3 +1,3 @@
-proxy=${const.conf.default.proxy}
-port=${const.conf.default.port}
-proto=${const.conf.default.proto}
+proxy=127.0.0.1
+port=9050
+proto=--socks5-hostname

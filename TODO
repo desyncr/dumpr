@@ -1,9 +1,10 @@
- TODO
-   - `dynamic` param to update list as it is updated on disk. Ignore already downloaded items on list.
-   - Use separate script files (at least for dev- with phing joining them togeter on build)
+TODO
    - Get ride of helpers.
+   - Use separate script files (at least for dev- with phing joining them togeter on build)
    - Implement pause. Catch interrups/events. (I think events/interrups would be catched by curl instead of our script)
 
+   [done] Remove phing dependency - use another build script
+   [done] `dynamic` param to update list as it is updated on disk. Ignore already downloaded items on list.
    [done] Use different download.lst, success, failed etc. when they are generated automatically (ie: when using --file)
    [done] Pass params to curl.
    [done] Use an index to start downloads from a given item on the list, or download from a given offset a determined number of files. --offset 1,13 (from 1 to 13), --offset 5 (from 5th item)
@@ -19,7 +20,8 @@
        * create download list from a directory listing.
        x check only operations (file sizes)
    [done] Add support for single file download: dumpr.sh file http://sdf/file.avi
- BUG
+
+BUGS
    [open]
    - Doesn't show proxy settings correctly (when no proxy uses it doesn't display anything; when there is a proxy settings enabled it shows "(No proxy)")
    - Doesn't create /tmp/dumpr folder. Fails to create tmp list if folder doesn't exists.

@@ -1,10 +1,9 @@
 Download manager/queue downloader.
 ==================================
-
-  ./dumpr.sh --url|--file|--list url|list [--dest][--config][--create-list][--retry][--hash][--on-complete]
+  ./dumpr.sh download --url|--file|--list url|list [--dest][--config][--create-list][--retry][--hash][--on-complete]
 
 ## Example: ##
-  ./dumper.sh --list=list.txt --dest=~/downloads/dest
+  ./dumper.sh download --list=list.txt --dest=~/downloads/dest
 
   Will open `list.txt` on current directory to read its contents.
   From `list.txt` the script will take the items to download.
@@ -21,5 +20,5 @@ Download manager/queue downloader.
   --on-complete: Executes a program or script, or commands, on download completion.
 
 ## More examples: ##
-  asphyxia@dev$ dumpr.sh --url=http://localhost/music/ --dest=~/downloads/music/
+  asphyxia@dev$ dumpr.sh download --url=http://localhost/music/ --dest=~/downloads/music/
 
