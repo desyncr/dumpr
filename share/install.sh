@@ -3,7 +3,7 @@ echo "\033[0;34mInstalling Dumpr to /usr/local/bin\033[0m"
 git clone https://github.com/asphxia/dumpr.git ~/.dumpr/
 
 echo "\033[0;34mInstalling locally /usr/local/bin/dumpr\033[0m"
-ln -s ~/.dumpr/target/Dumpr-0.129.0-SNAPSHOT.sh /usr/local/bin/dumpr
+ln -s ~/.dumpr/target/Dumpr-0.130.0-SNAPSHOT.sh /usr/local/bin/dumpr
 
 echo
 cat <<EOF
@@ -20,4 +20,4 @@ cat <<EOF
                                            888      
 EOF
 echo
-echo "\033[0;34m            Done. Now you're using Dumpr v0.129.0\033[0m"
+echo "\033[0;34m            Done. Now you're using Dumpr v0.130.0\033[0m"
