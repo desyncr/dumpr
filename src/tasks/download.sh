@@ -8,6 +8,7 @@ listInitialize
 ## Main loop
 ##
 # Displaying use settings
+debug=0
 (( ! $quiet )) && [[ -e BANNER ]] && cat $BANNER
 [[ $type == "list" && ! -e $src ]] && echo "File list doesn't exists!: $src" && exit
 
@@ -30,8 +31,8 @@ while (( 1 )); do
 
         if (( $try == 1 )); then
             # Decoding the file name and adding it to the list of items to hash at the end of the script.
-            filename=`$HELPER_PATH filename $url`;
-            filename=`$HELPER_PATH decode $filename`;
+            filename=$(basename "$url");
+            filename=$(urldecode "$filename");
 
             # if there is the recursion option enabled and we're going into
             # some subfolders then we have to deal with the creation of these
@@ -39,7 +40,7 @@ while (( 1 )); do
             # there is the case of recursive dumping.
             if (( $recursive )); then
                 relative_path=`$HELPER_PATH relative-path $base $url`;
-                relative_path=`$HELPER_PATH decode "$relative_path"`;
+                relative_path=$(urldecode "$relative_path");
                 if [[ ! -e "$dest/$relative_path" ]]; then
                     log "Creating directory: '$dest/$relative_path'...";
                     mkdir -p "$dest/$relative_path";
@@ -54,7 +55,11 @@ while (( 1 )); do
             downloaded_items="$downloaded_items '$dest/$relative_path/$filename'";
         fi;
 
-        `curl $params $proto $proxy_port  --output "$dest/$relative_path/$filename" -C - --retry $retry "$url"`;
+        if (( $debug )); then
+            sleep 1
+        else
+            `curl $params $proto $proxy_port  --output "$dest/$relative_path/$filename" -C - --retry $retry "$url"`;
+        fi;
         if (( ! $? )); then
             break;
         fi;

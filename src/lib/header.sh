@@ -5,8 +5,8 @@ DEF_TMP_NAME=.dumpr-$RANDOM
 TMP_LIST=$DEF_TMP_PATH$DEF_LIST_NAME-$RANDOM
 HELPER_PATH=~/.dumpr/share/helpers.pl
 BANNER=~/.dumpr/share/banner.sh
-BUILD_TIME="vie jun 21 22:17:23 ART 2013"
-VERSION_NUMBER=0.129.0
+BUILD_TIME="mon aug 19 05:43:33 ART 2013"
+VERSION_NUMBER=0.131.0
 
 src=download.lst
 type=list
